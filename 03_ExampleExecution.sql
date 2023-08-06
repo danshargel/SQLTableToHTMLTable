@@ -26,14 +26,13 @@ DECLARE @HTMLMail VARCHAR(MAX),
 -- Send using temp table
 ---------------------------------------
 EXEC DBAdmin.dbo.SQLTableToHTMLTable @TableName = '#tbTestMail',
-                                     --@ColumnsToExclude = 'RowID',
-                                     @HTML = @HTMLMail OUTPUT;
+                                    @HTML = @HTMLMail OUTPUT;
 
 SELECT @Message = '<h3>Hey look at this from #tbTestMail.</h3><br><br>' + @HTMLMail;
 
 EXEC msdb.dbo.sp_send_dbmail @profile_name = DEFAULT,
                              @body_format = 'HTML',
-                             @recipients = 'email@xyz.com',
+                             @recipients = 'youremail@xyz.com',
                              @subject = 'test email #tbTestMail',
                              @body = @Message;
 
@@ -44,14 +43,13 @@ DROP TABLE IF EXISTS #tbTestMail;
 -- Send using permanent table
 ---------------------------------------
 EXEC DBAdmin.dbo.SQLTableToHTMLTable @TableName = 'DBAdmin.temp.tbTestMail',
-                                     --@ColumnsToExclude = 'RowID',
                                      @HTML = @HTMLMail OUTPUT;
 
 SELECT @Message = '<h3>Hey look at this from DBAdmin.temp.tbTestMail.</h3><br><br>' + @HTMLMail;
 
 EXEC msdb.dbo.sp_send_dbmail @profile_name = DEFAULT,
                              @body_format = 'HTML',
-                             @recipients = 'email@xyz.com',
+                             @recipients = 'youremail@xyz.com',
                              @subject = 'test email DBAdmin.temp.tbTestMail',
                              @body = @Message;
 
