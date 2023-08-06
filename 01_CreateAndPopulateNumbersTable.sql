@@ -1,5 +1,8 @@
-DROP TABLE IF EXISTS dbo.Number;
+Use DBAdmin
 GO
+
+--DROP TABLE IF EXISTS dbo.Number;
+--GO
 
 
 DECLARE @UpperBound INT = 1000000;
