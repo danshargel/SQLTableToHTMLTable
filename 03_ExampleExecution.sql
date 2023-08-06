@@ -26,7 +26,7 @@ DECLARE @HTMLMail VARCHAR(MAX),
 -- Send using temp table
 ---------------------------------------
 EXEC DBAdmin.dbo.SQLTableToHTMLTable @TableName = '#tbTestMail',
-                                     @ColumnsToExclude = 'RowID',
+                                     --@ColumnsToExclude = 'RowID',
                                      @HTML = @HTMLMail OUTPUT;
 
 SELECT @Message = '<h3>Hey look at this from #tbTestMail.</h3><br><br>' + @HTMLMail;
@@ -44,7 +44,7 @@ DROP TABLE IF EXISTS #tbTestMail;
 -- Send using permanent table
 ---------------------------------------
 EXEC DBAdmin.dbo.SQLTableToHTMLTable @TableName = 'DBAdmin.temp.tbTestMail',
-                                     @ColumnsToExclude = 'RowID',
+                                     --@ColumnsToExclude = 'RowID',
                                      @HTML = @HTMLMail OUTPUT;
 
 SELECT @Message = '<h3>Hey look at this from DBAdmin.temp.tbTestMail.</h3><br><br>' + @HTMLMail;
