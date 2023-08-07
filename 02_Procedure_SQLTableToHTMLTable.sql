@@ -303,11 +303,7 @@ END CATCH;
 
 RETURN;
 
------------------
--- PERMISSIONS --
------------------
 
-GRANT EXECUTE TO PUBLIC;
 GO
 
 
